@@ -1,0 +1,83 @@
+{
+  "description": "",
+  "fieldConfig": {
+    "defaults": {
+      "custom": {},
+      "thresholds": {
+        "mode": "absolute",
+        "steps": [
+          {
+            "color": "dark-red",
+            "value": null
+          },
+          {
+            "color": "dark-red",
+            "value": 0
+          },
+          {
+            "color": "dark-orange",
+            "value": 5
+          },
+          {
+            "color": "dark-yellow",
+            "value": 10
+          },
+          {
+            "color": "dark-green",
+            "value": 15
+          },
+          {
+            "color": "#EAB839",
+            "value": 30
+          },
+          {
+            "color": "dark-red",
+            "value": 40
+          }
+        ]
+      },
+      "mappings": [],
+      "decimals": 0,
+      "max": 60,
+      "min": -20,
+      "unit": "celsius"
+    },
+    "overrides": []
+  },
+  "gridPos": {
+    "h": 5,
+    "w": 5,
+    "x": 0,
+    "y": 23
+  },
+  "id": 79,
+  "options": {
+    "reduceOptions": {
+      "values": false,
+      "calcs": [
+        "last"
+      ],
+      "fields": ""
+    },
+    "text": {},
+    "showThresholdLabels": false,
+    "showThresholdMarkers": true,
+    "orientation": "auto"
+  },
+  "pluginVersion": "7.4.3",
+  "targets": [
+    {
+      "expr": "JK_BMS{mode=\"temp_BMS1\"}",
+      "format": "time_series",
+      "instant": true,
+      "interval": "",
+      "legendFormat": "Battery Current",
+      "refId": "A"
+    }
+  ],
+  "timeFrom": null,
+  "timeShift": null,
+  "title": "Temperature BMS1",
+  "type": "gauge",
+  "datasource": null
+}

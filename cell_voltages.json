@@ -1,0 +1,218 @@
+{
+  "description": "",
+  "fieldConfig": {
+    "defaults": {
+      "custom": {},
+      "thresholds": {
+        "mode": "absolute",
+        "steps": [
+          {
+            "color": "dark-red",
+            "value": null
+          },
+          {
+            "color": "dark-red",
+            "value": 2.5
+          },
+          {
+            "color": "dark-yellow",
+            "value": 2.6
+          },
+          {
+            "color": "dark-green",
+            "value": 3
+          },
+          {
+            "color": "dark-yellow",
+            "value": 3.5
+          },
+          {
+            "color": "semi-dark-red",
+            "value": 3.6
+          },
+          {
+            "color": "dark-red",
+            "value": 3.65
+          }
+        ]
+      },
+      "mappings": [],
+      "color": {
+        "mode": "thresholds"
+      },
+      "decimals": 3,
+      "max": 3.75,
+      "min": 2.4
+    },
+    "overrides": []
+  },
+  "gridPos": {
+    "h": 8,
+    "w": 12,
+    "x": 0,
+    "y": 15
+  },
+  "id": 74,
+  "options": {
+    "reduceOptions": {
+      "values": false,
+      "calcs": [
+        "lastNotNull"
+      ],
+      "fields": ""
+    },
+    "orientation": "vertical",
+    "text": {},
+    "displayMode": "basic",
+    "showUnfilled": true
+  },
+  "pluginVersion": "7.4.3",
+  "targets": [
+    {
+      "exemplar": false,
+      "expr": "JK_BMS{mode=\"cell1_BMS1\"}",
+      "instant": false,
+      "interval": "",
+      "legendFormat": "1",
+      "refId": "A"
+    },
+    {
+      "exemplar": false,
+      "expr": "JK_BMS{mode=\"cell2_BMS1\"}",
+      "hide": false,
+      "instant": false,
+      "interval": "",
+      "legendFormat": "2",
+      "refId": "B"
+    },
+    {
+      "exemplar": false,
+      "expr": "JK_BMS{mode=\"cell3_BMS1\"}",
+      "hide": false,
+      "instant": false,
+      "interval": "",
+      "legendFormat": "3",
+      "refId": "C"
+    },
+    {
+      "exemplar": false,
+      "expr": "JK_BMS{mode=\"cell4_BMS1\"}",
+      "hide": false,
+      "instant": false,
+      "interval": "",
+      "legendFormat": "4",
+      "refId": "D"
+    },
+    {
+      "exemplar": false,
+      "expr": "JK_BMS{mode=\"cell5_BMS1\"}",
+      "hide": false,
+      "instant": false,
+      "interval": "",
+      "legendFormat": "5",
+      "refId": "E"
+    },
+    {
+      "exemplar": false,
+      "expr": "JK_BMS{mode=\"cell6_BMS1\"}",
+      "hide": false,
+      "instant": false,
+      "interval": "",
+      "legendFormat": "6",
+      "refId": "F"
+    },
+    {
+      "exemplar": false,
+      "expr": "JK_BMS{mode=\"cell7_BMS1\"}",
+      "hide": false,
+      "instant": false,
+      "interval": "",
+      "legendFormat": "7",
+      "refId": "G"
+    },
+    {
+      "exemplar": false,
+      "expr": "JK_BMS{mode=\"cell8_BMS1\"}",
+      "hide": false,
+      "instant": false,
+      "interval": "",
+      "legendFormat": "8",
+      "refId": "H"
+    },
+    {
+      "exemplar": false,
+      "expr": "JK_BMS{mode=\"cell9_BMS1\"}",
+      "hide": false,
+      "instant": false,
+      "interval": "",
+      "legendFormat": "9",
+      "refId": "I"
+    },
+    {
+      "exemplar": false,
+      "expr": "JK_BMS{mode=\"cell10_BMS1\"}",
+      "hide": false,
+      "instant": false,
+      "interval": "",
+      "legendFormat": "10",
+      "refId": "J"
+    },
+    {
+      "exemplar": false,
+      "expr": "JK_BMS{mode=\"cell11_BMS1\"}",
+      "hide": false,
+      "instant": false,
+      "interval": "",
+      "legendFormat": "11",
+      "refId": "K"
+    },
+    {
+      "exemplar": false,
+      "expr": "JK_BMS{mode=\"cell12_BMS1\"}",
+      "hide": false,
+      "instant": false,
+      "interval": "",
+      "legendFormat": "12",
+      "refId": "L"
+    },
+    {
+      "exemplar": false,
+      "expr": "JK_BMS{mode=\"cell13_BMS1\"}",
+      "hide": false,
+      "instant": false,
+      "interval": "",
+      "legendFormat": "13",
+      "refId": "M"
+    },
+    {
+      "exemplar": false,
+      "expr": "JK_BMS{mode=\"cell14_BMS1\"}",
+      "hide": false,
+      "instant": false,
+      "interval": "",
+      "legendFormat": "14",
+      "refId": "N"
+    },
+    {
+      "exemplar": false,
+      "expr": "JK_BMS{mode=\"cell15_BMS1\"}",
+      "hide": false,
+      "instant": false,
+      "interval": "",
+      "legendFormat": "15",
+      "refId": "O"
+    },
+    {
+      "exemplar": false,
+      "expr": "JK_BMS{mode=\"cell16_BMS1\"}",
+      "hide": false,
+      "instant": false,
+      "interval": "",
+      "legendFormat": "16",
+      "refId": "P"
+    }
+  ],
+  "title": "Cell Voltages BMS 1",
+  "type": "bargauge",
+  "datasource": null
+}
