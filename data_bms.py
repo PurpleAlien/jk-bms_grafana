@@ -1,5 +1,5 @@
 # This script reads the data from a JB BMS over RS-485 and formats
-# it for use with git@github.com:PurpleAlien/jk-bms_grafana.git
+# it for use with https://github.com/BarkinSpider/SolarShed/
 
 import time
 import sys, os, io
