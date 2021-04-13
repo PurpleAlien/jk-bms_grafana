@@ -36,7 +36,7 @@ def readBMS(fileObj):
     
     time.sleep(.1)
 
-    while bms.inWaiting() >=3 :
+    if bms.inWaiting() >=3 :
         if bms.read(1).hex() == 'dd' :
             if bms.read(1).hex() == '04' :
                 if bms.read(1).hex() == '00' :
@@ -52,7 +52,8 @@ def readBMS(fileObj):
                         dataStr  = f"JK_BMS{valName} {val}"
                         print(dataStr, file=fileObj)
                     
-                 
+    bms.reset_input_buffer()    
+           
     time.sleep(.1)
     
     # temperature etc.
@@ -62,7 +63,7 @@ def readBMS(fileObj):
     
     # We read in all the data even though most are not written to the output file
     # You could expand this easily.
-    while bms.inWaiting() >=3 :
+    if bms.inWaiting() >=3 :
         if bms.read(1).hex() == 'dd' :
             if bms.read(1).hex() == '03' :
                 if bms.read(1).hex() == '00' :
@@ -135,6 +136,9 @@ def readBMS(fileObj):
                     #temperature 3 (bat probe 2)
                     val = int.from_bytes(bms.read(2),byteorder='big')
                     #print((val-2731)/10)
+
+    bms.reset_input_buffer()
+
 
 while True:
     file_object = open('/ramdisk/JK_BMS.prom.tmp', mode='w')
