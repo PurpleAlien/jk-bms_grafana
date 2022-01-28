@@ -92,6 +92,24 @@ def readBMS(fileObj):
                         valName  = "{" + valName + "}"
                         dataStr  = f"JK_BMS{valName} {voltage}"
                         print(dataStr, file=fileObj)
+                    
+                    # Temperatures are in the next nine bytes (MOSFET, Probe 1 and Probe 2), register id + two bytes each for data
+                    # Anything over 100 is negative, so 110 == -10
+                    temp_fet = struct.unpack_from('>H', data, bytecount + 3)[0]
+                    if temp_fet > 100 :
+                        temp_fet = -(temp_fet - 100)
+                    temp_1 = struct.unpack_from('>H', data, bytecount + 6)[0]
+                    if temp_1 > 100 :
+                        temp_1 = -(temp_1 - 100)
+                    temp_2 = struct.unpack_from('>H', data, bytecount + 9)[0]
+                    if temp_2 > 100 :
+                        temp_2 = -(temp_2 - 100)
+        
+                    # For now we just show the average between the two probes in Grafana
+                    valName  = "mode=\"temp_BMS\""
+                    valName  = "{" + valName + "}"
+                    dataStr  = f"JK_BMS{valName} {(temp_1+temp_2)/2}"
+                    print(dataStr, file=fileObj)
 
         bms.reset_input_buffer()    
     
