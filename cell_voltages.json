@@ -70,7 +70,7 @@
   "targets": [
     {
       "exemplar": false,
-      "expr": "JK_BMS{mode=\"cell1_BMS1\"}",
+      "expr": "JK_BMS{mode=\"cell1_BMS\"}",
       "instant": false,
       "interval": "",
       "legendFormat": "1",
@@ -78,7 +78,7 @@
     },
     {
       "exemplar": false,
-      "expr": "JK_BMS{mode=\"cell2_BMS1\"}",
+      "expr": "JK_BMS{mode=\"cell2_BMS\"}",
       "hide": false,
       "instant": false,
       "interval": "",
@@ -87,7 +87,7 @@
     },
     {
       "exemplar": false,
-      "expr": "JK_BMS{mode=\"cell3_BMS1\"}",
+      "expr": "JK_BMS{mode=\"cell3_BMS\"}",
       "hide": false,
       "instant": false,
       "interval": "",
@@ -96,7 +96,7 @@
     },
     {
       "exemplar": false,
-      "expr": "JK_BMS{mode=\"cell4_BMS1\"}",
+      "expr": "JK_BMS{mode=\"cell4_BMS\"}",
       "hide": false,
       "instant": false,
       "interval": "",
@@ -105,7 +105,7 @@
     },
     {
       "exemplar": false,
-      "expr": "JK_BMS{mode=\"cell5_BMS1\"}",
+      "expr": "JK_BMS{mode=\"cell5_BMS\"}",
       "hide": false,
       "instant": false,
       "interval": "",
@@ -114,7 +114,7 @@
     },
     {
       "exemplar": false,
-      "expr": "JK_BMS{mode=\"cell6_BMS1\"}",
+      "expr": "JK_BMS{mode=\"cell6_BMS\"}",
       "hide": false,
       "instant": false,
       "interval": "",
@@ -123,7 +123,7 @@
     },
     {
       "exemplar": false,
-      "expr": "JK_BMS{mode=\"cell7_BMS1\"}",
+      "expr": "JK_BMS{mode=\"cell7_BMS\"}",
       "hide": false,
       "instant": false,
       "interval": "",
@@ -132,7 +132,7 @@
     },
     {
       "exemplar": false,
-      "expr": "JK_BMS{mode=\"cell8_BMS1\"}",
+      "expr": "JK_BMS{mode=\"cell8_BMS\"}",
       "hide": false,
       "instant": false,
       "interval": "",
@@ -141,7 +141,7 @@
     },
     {
       "exemplar": false,
-      "expr": "JK_BMS{mode=\"cell9_BMS1\"}",
+      "expr": "JK_BMS{mode=\"cell9_BMS\"}",
       "hide": false,
       "instant": false,
       "interval": "",
@@ -150,7 +150,7 @@
     },
     {
       "exemplar": false,
-      "expr": "JK_BMS{mode=\"cell10_BMS1\"}",
+      "expr": "JK_BMS{mode=\"cell10_BMS\"}",
       "hide": false,
       "instant": false,
       "interval": "",
@@ -159,7 +159,7 @@
     },
     {
       "exemplar": false,
-      "expr": "JK_BMS{mode=\"cell11_BMS1\"}",
+      "expr": "JK_BMS{mode=\"cell11_BMS\"}",
       "hide": false,
       "instant": false,
       "interval": "",
@@ -168,7 +168,7 @@
     },
     {
       "exemplar": false,
-      "expr": "JK_BMS{mode=\"cell12_BMS1\"}",
+      "expr": "JK_BMS{mode=\"cell12_BMS\"}",
       "hide": false,
       "instant": false,
       "interval": "",
@@ -177,7 +177,7 @@
     },
     {
       "exemplar": false,
-      "expr": "JK_BMS{mode=\"cell13_BMS1\"}",
+      "expr": "JK_BMS{mode=\"cell13_BMS\"}",
       "hide": false,
       "instant": false,
       "interval": "",
@@ -186,7 +186,7 @@
     },
     {
       "exemplar": false,
-      "expr": "JK_BMS{mode=\"cell14_BMS1\"}",
+      "expr": "JK_BMS{mode=\"cell14_BMS\"}",
       "hide": false,
       "instant": false,
       "interval": "",
@@ -195,7 +195,7 @@
     },
     {
       "exemplar": false,
-      "expr": "JK_BMS{mode=\"cell15_BMS1\"}",
+      "expr": "JK_BMS{mode=\"cell15_BMS\"}",
       "hide": false,
       "instant": false,
       "interval": "",
@@ -204,7 +204,7 @@
     },
     {
       "exemplar": false,
-      "expr": "JK_BMS{mode=\"cell16_BMS1\"}",
+      "expr": "JK_BMS{mode=\"cell16_BMS\"}",
       "hide": false,
       "instant": false,
       "interval": "",
@@ -212,7 +212,7 @@
       "refId": "P"
     }
   ],
-  "title": "Cell Voltages BMS 1",
+  "title": "Cell Voltages BMS",
   "type": "bargauge",
   "datasource": null
 }

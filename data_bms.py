@@ -88,7 +88,7 @@ def readBMS(fileObj):
                     # Voltages start at index 2, in groups of 3
                     for i in range(cellcount) :
                         voltage = struct.unpack_from('>xH', data, i * 3 + 2)[0]/1000
-                        valName  = "mode=\"cell"+str(i+1)+"_BMS1\""
+                        valName  = "mode=\"cell"+str(i+1)+"_BMS\""
                         valName  = "{" + valName + "}"
                         dataStr  = f"JK_BMS{valName} {voltage}"
                         print(dataStr, file=fileObj)
