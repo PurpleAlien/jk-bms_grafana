@@ -3,24 +3,26 @@
 
 import time
 import sys, os, io
+import struct
 
 # Plain serial... Modbus would have been nice, but oh well. 
 import serial
-
-# Yes, we can get this info programatically, but for now just set it here
-numCells = 16
 
 sleepTime = 10
 
 try:
     bms = serial.Serial('/dev/ttyUSB0')
-    bms.baudrate = 9600
+    bms.baudrate = 115200
     bms.timeout  = 0.2
 except:
     print("BMS not found.")
 
 # The hex string composing the command, including CRC check etc.
-# See also: https://diysolarforum.com/resources/rs-485-heltec-jk-bms.140/
+# See also: 
+# - https://github.com/syssi/esphome-jk-bms
+# - https://github.com/NEEY-electronic/JK/tree/JK-BMS
+# - https://github.com/Louisvdw/dbus-serialbattery
+
 def sendBMSCommand(cmd_string):
     cmd_bytes = bytearray.fromhex(cmd_string)
     for cmd_byte in cmd_bytes:
@@ -31,115 +33,67 @@ def sendBMSCommand(cmd_string):
 # This could be much better, but it works.
 def readBMS(fileObj):
 
-    # cell voltages
-    sendBMSCommand('DD A5 04 00 FF FC 77')
+    # Read all command
+    sendBMSCommand('4E 57 00 13 00 00 00 00 06 03 00 00 00 00 00 00 68 00 00 01 29')
     
     time.sleep(.1)
 
-    if bms.inWaiting() >=3 :
-        if bms.read(1).hex() == 'dd' :
-            if bms.read(1).hex() == '04' :
-                if bms.read(1).hex() == '00' :
-                    #next byte is length
-                    size = int.from_bytes(bms.read(1),byteorder='big')
-                    
-                    i = 0
-                    while i < numCells :
-                        i += 1
-                        val = int.from_bytes(bms.read(2),byteorder='big')/1000
-                        valName  = "mode=\"cell"+str(i)+"_BMS1\""
-                        valName  = "{" + valName + "}"
-                        dataStr  = f"JK_BMS{valName} {val}"
-                        print(dataStr, file=fileObj)
-                    
+    if bms.inWaiting() >= 4 :
+        if bms.read(1).hex() == '4e' : # header byte 1
+            if bms.read(1).hex() == '57' : # header byte 2
+                # next two bytes is the length of the data package, including the two length bytes
+                length = int.from_bytes(bms.read(2),byteorder='big')
+                length -= 2 # Remaining after length bytes
+
+                # Lets wait until all the data that should be there, really is present.
+                # If not, something went wrong. Flush and exit
+                available = bms.inWaiting()
+                if available != length:
+                    time.sleep(0.1)
+                    # if it's not here by now, exit
+                    if available != length:
+                        bms.reset_input_buffer()
+                        return None
+               
+                # Reconstruct the header and length field
+                b = bytearray.fromhex("4e57") 
+                b += (length+2).to_bytes(2, byteorder='big')
+                
+                # Read all the data
+                data = bytearray(bms.read(available))
+                # And re-attach the header (needed for CRC calculation)
+                data = b + data 
+        
+                # Calculate the CRC sum
+                crc_calc = sum(data[0:-4])
+                # Extract the CRC value from the data
+                crc_lo = struct.unpack_from('>H', data[-2:])[0]
+                
+                # Exit if CRC doesn't match
+                if crc_calc != crc_lo :
+                    bms.reset_input_buffer()
+                    return None
+            
+                # The actual data we need
+                data = data[11:length-19] # at location 0 we have 0x79
+                
+                # The byte at location 1 is the length count for the cell data bytes
+                # Each cell has 3 bytes representing the voltage per cell in mV
+                bytecount = data[1]
+                
+                # We can use this number to determine the total amount of cells we have
+                cellcount = int(bytecount/3)                
+
+                # Voltages start at index 2, in groups of 3
+                for i in range(cellcount):
+                    voltage = struct.unpack_from('>xH', data, i * 3 + 2)[0]/1000
+                    valName  = "mode=\"cell"+str(i)+"_BMS1\""
+                    valName  = "{" + valName + "}"
+                    dataStr  = f"JK_BMS{valName} {voltage}"
+                    print(dataStr, file=fileObj)
+
     bms.reset_input_buffer()    
            
-    time.sleep(.1)
-    
-    # temperature etc.
-    sendBMSCommand('DD A5 03 00 FF FD 77')
-
-    time.sleep(.1)
-    
-    # We read in all the data even though most are not written to the output file
-    # You could expand this easily.
-    if bms.inWaiting() >=3 :
-        if bms.read(1).hex() == 'dd' :
-            if bms.read(1).hex() == '03' :
-                if bms.read(1).hex() == '00' :
-                    #next byte is length
-                    size = int.from_bytes(bms.read(1),byteorder='big')
-                    
-                    #battery voltage            
-                    val = int.from_bytes(bms.read(2),byteorder='big')
-                    #print(val/100)  
-                    
-                    #total current
-                    val = int.from_bytes(bms.read(2),byteorder='big')
-                    #print(val/100)
-
-                    #remaining capacity
-                    val = int.from_bytes(bms.read(2),byteorder='big')
-                    #print(val/100)                    
-
-                    #total capcity (as configured)
-                    val = int.from_bytes(bms.read(2),byteorder='big')
-                    #print(val/100)
-                    
-                    #cycle number
-                    val = int.from_bytes(bms.read(2),byteorder='big')
-                    #print(val)
-               
-                    #production date
-                    val = int.from_bytes(bms.read(2),byteorder='big')
-                
-                    #balance low
-                    val = int.from_bytes(bms.read(2),byteorder='big')
-        
-                    #balance high
-                    val = int.from_bytes(bms.read(2),byteorder='big')
-
-                    #protection status
-                    val = int.from_bytes(bms.read(2),byteorder='big')
-
-                    #version
-                    val = int.from_bytes(bms.read(1),byteorder='big')            
-
-                    #remaning capacity in percentage
-                    val = int.from_bytes(bms.read(1),byteorder='big')
-                    #print(val)
-            
-                    #mos status
-                    val = int.from_bytes(bms.read(1),byteorder='big')
-                    #print(val)
-
-                    #number of cells
-                    val = int.from_bytes(bms.read(1),byteorder='big')
-                    #print(val)
-
-                    #number of temperature probes
-                    val = int.from_bytes(bms.read(1),byteorder='big')
-                    #print(val)
-
-                    #temperature 1 (internal)
-                    val = int.from_bytes(bms.read(2),byteorder='big')
-                    #print((val-2731)/10)
-
-                    #temperature 2 (bat probe 1)
-                    val = int.from_bytes(bms.read(2),byteorder='big')
-                    val = (val-2731)/10
-                    valName  = "mode=\"temp_BMS1\""
-                    valName  = "{" + valName + "}"
-                    dataStr  = f"JK_BMS{valName} {val}"
-                    print(dataStr, file=fileObj)
-                     
-                    #temperature 3 (bat probe 2)
-                    val = int.from_bytes(bms.read(2),byteorder='big')
-                    #print((val-2731)/10)
-
-    bms.reset_input_buffer()
-
-
 while True:
     file_object = open('/ramdisk/JK_BMS.prom.tmp', mode='w')
     readBMS(file_object)
