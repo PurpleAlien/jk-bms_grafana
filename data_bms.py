@@ -110,7 +110,17 @@ def readBMS(fileObj):
                     valName  = "{" + valName + "}"
                     dataStr  = f"JK_BMS{valName} {(temp_1+temp_2)/2}"
                     print(dataStr, file=fileObj)
+                        
+                    # Battery voltage
+                    voltage = struct.unpack_from('>H', data, bytecount + 12)[0]/100
 
+                    # Current
+                    current = struct.unpack_from('>H', data, bytecount + 15)[0]/100
+                    
+                    # Remaining capacity, %
+                    capacity = struct.unpack_from('>B', data, bytecount + 18)[0]                   
+                    
+ 
         bms.reset_input_buffer()    
     
     except Exception as e :
