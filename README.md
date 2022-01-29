@@ -15,3 +15,6 @@ RS485-TTL plug on BMS (4 Pins, JST 1.25mm pinch)
 │GND  RX  TX VBAT│
 └────────────────┘
 ```
+
+See this post on DIY Solar Forum for the locaton of this port on various versions of the BMS:
+https://diysolarforum.com/threads/victron-venusos-driver-for-serial-connected-bms-llt-jbd-daly-smart-ant-jkbms-heltec-renogy.17847/post-424921
