@@ -51,6 +51,7 @@ def readBMS(fileObj):
                     available = bms.inWaiting()
                     if available != length :
                         time.sleep(0.1)
+                        available = bms.inWaiting()
                         # if it's not here by now, exit
                         if available != length :
                             bms.reset_input_buffer()
