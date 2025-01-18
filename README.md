@@ -21,7 +21,7 @@ RS485-TTL plug on BMS (4 Pins, JST 1.25mm pinch)
 └────────────────┘
 ```
 
-To prevent issues, ground loops, and other problems, you should use an isolated UART/USB converter or isolated UART/UART if you connect this directly to another microcontroller. Failing that, use a USB to USB isolator like this one: https://s.click.aliexpress.com/e/_onvOeBT if you connect to USB like on an R-Pi or something.
+To prevent issues, ground loops (the GND pin connects directly to battery negative), and other problems, you should use an isolated UART/USB converter or isolated UART/UART if you connect this directly to another microcontroller. Failing that, use a USB to USB isolator like this one: https://s.click.aliexpress.com/e/_onvOeBT if you connect to USB like on an R-Pi or something. 
 
 See this post on DIY Solar Forum for the locaton of this port on various versions of the BMS:
 https://diysolarforum.com/threads/victron-venusos-driver-for-serial-connected-bms-llt-jbd-daly-smart-ant-jkbms-heltec-renogy.17847/post-424921
