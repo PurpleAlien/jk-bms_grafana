@@ -3,7 +3,7 @@ Read data from a JK BMS through RS-485 and graph it in Grafana.
 This script is intended to be used with:
 https://github.com/BarkinSpider/SolarShed/
 
-The JK BMS can be found on AliExpress and other sites, for example: https://s.click.aliexpress.com/e/_DBEzZwv
+The JK BMS can be found on AliExpress and other sites, for example: https://s.click.aliexpress.com/e/_DBEzZwv or https://s.click.aliexpress.com/e/_oCQ9mP3
 
 Alternatively, a set-up for this is documented here for both Raspberry Pi and plain Debian or derivatives:
 https://diysolarforum.com/ewr-carta/data_communication/
