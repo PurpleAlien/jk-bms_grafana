@@ -10,7 +10,7 @@ https://diysolarforum.com/ewr-carta/data_communication/
 
 # Pinout and connection
 
-The JK BMS has an RS-485 port, but this is actually a TTL UART that gets turned into RS-485 with an optional converter, which in turn can be used with a RS-485 to USB converter. While this works, you don't need this whole chain. You can directly connect a TTL to USB converter (like this one: https://www.amazon.com/HJHYUL-CP2102-USB-Serial-Adapter/dp/B0FJRTL572&tag=solarsizer-20) to the TTL UART port. The pin-out on the connector:
+The JK BMS has an RS-485 port, but this is actually a TTL UART that gets turned into RS-485 with an optional converter, which in turn can be used with a RS-485 to USB converter. While this works, you don't need this whole chain. You can directly connect a TTL to USB converter (like this one [like this one](https://www.amazon.com/HJHYUL-CP2102-USB-Serial-Adapter/dp/B0FJRTL572)) to the TTL UART port. The pin-out on the connector:
 
 ```
 RS485-TTL plug on BMS (4 Pins, JST 1.25mm pinch)
